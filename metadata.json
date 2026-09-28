@@ -1,0 +1,6 @@
+{
+  "name": "Droid Toolkit",
+  "description": "Complete professional Android device diagnostics, tests, and information app.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
