@@ -5,8 +5,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.NewReleases
 import androidx.compose.material.icons.filled.SystemUpdate
@@ -20,6 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ui.components.MockBannerAd
+import com.example.ui.components.MockNativeAdBanner
 
 @Composable
 fun ForceUpdateScreen(
@@ -38,11 +42,19 @@ fun ForceUpdateScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(24.dp)
-                .safeDrawingPadding(),
+                .padding(16.dp)
+                .safeDrawingPadding()
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Top
         ) {
+            // Exactly one Banner Ad at the top of the page
+            MockBannerAd(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            )
+
             // Elegant Vector Icon Badge
             Box(
                 modifier = Modifier
@@ -177,6 +189,13 @@ fun ForceUpdateScreen(
                     color = Color.White
                 )
             }
+
+            Spacer(modifier = Modifier.height(28.dp))
+
+            // Exactly one Native Ad at the bottom of the page
+            MockNativeAdBanner(
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }

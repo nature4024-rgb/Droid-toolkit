@@ -266,7 +266,7 @@ fun MockNativeAdBanner(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    AdNetwork.values().forEach { network ->
+                    AdNetwork.entries.forEach { network ->
                         val isSelected = currentNetwork == network
                         Box(
                             modifier = Modifier

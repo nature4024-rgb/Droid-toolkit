@@ -67,6 +67,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.example.model.*
+import com.example.ui.components.AdNetwork
+import com.example.ui.components.MockBannerAd
+import com.example.ui.components.MockNativeAdBanner
 import com.example.ui.theme.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -83,29 +86,55 @@ fun ToolDetailScreenLayout(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { 
-                    Text(
-                        text = title, 
-                        fontWeight = FontWeight.Bold, 
-                        fontSize = 20.sp,
-                        color = TextPrimary
-                    ) 
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack, modifier = Modifier.testTag("back_button")) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack, 
-                            contentDescription = "Back",
-                            tint = TextPrimary
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = PureWhite,
-                    scrolledContainerColor = PureWhite
+            Column(modifier = Modifier.fillMaxWidth().background(PureWhite)) {
+                TopAppBar(
+                    title = { 
+                        Text(
+                            text = title, 
+                            fontWeight = FontWeight.Bold, 
+                            fontSize = 20.sp, 
+                            color = TextPrimary
+                        ) 
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = onBack, modifier = Modifier.testTag("back_button")) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack, 
+                                contentDescription = "Back",
+                                tint = TextPrimary
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = PureWhite,
+                        scrolledContainerColor = PureWhite
+                    )
                 )
-            )
+                // Exactly one Banner Ad at the top of the page
+                MockBannerAd(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 14.dp, vertical = 4.dp),
+                    initialNetwork = AdNetwork.ADMOB
+                )
+            }
+        },
+        bottomBar = {
+            // Exactly one Native Ad at the bottom of the page
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .navigationBarsPadding(),
+                color = PureWhite,
+                shadowElevation = 6.dp
+            ) {
+                MockNativeAdBanner(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp, vertical = 6.dp),
+                    initialNetwork = AdNetwork.FACEBOOK
+                )
+            }
         },
         containerColor = PureWhite,
         content = content

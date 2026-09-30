@@ -31,6 +31,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.model.*
+import com.example.ui.components.AdNetwork
+import com.example.ui.components.MockBannerAd
+import com.example.ui.components.MockNativeAdBanner
 import com.example.ui.theme.*
 import kotlinx.coroutines.launch
 
@@ -355,6 +358,13 @@ fun HomeScreen(
                             scrolledContainerColor = BgColor
                         )
                     )
+                    // Exactly one Banner Ad at the top of the page
+                    MockBannerAd(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 4.dp),
+                        initialNetwork = AdNetwork.ADMOB
+                    )
                 }
             },
             bottomBar = {
@@ -507,6 +517,14 @@ fun HomeScreen(
                         SettingsTab(viewModel, themePrimary)
                     }
                 }
+
+                // Exactly one Native Ad at the bottom of the page
+                MockNativeAdBanner(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp, bottom = 4.dp),
+                    initialNetwork = AdNetwork.FACEBOOK
+                )
 
                 // Bottom spacing for floating navigation bar
                 Spacer(Modifier.height(72.dp))
